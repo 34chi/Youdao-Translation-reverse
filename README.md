@@ -1,22 +1,24 @@
-# Youdao-Translation-reverse
-有道翻译js，py加密解密源码
+# 有道翻译加密机制研究
 
-### RESEARCH.md 技术报告
+> **法律声明**：本项目仅用于密码学技术研究和教育目的，不包含任何有道翻译的实际业务逻辑或真实加密密钥。请勿用于生产环境。
 
-```markdown
-# 有道翻译加密机制技术报告
+## 研究目标
 
-## 1. 加密流程概述
+通过逆向工程分析有道翻译的API加密机制，重点研究：
+- 请求签名生成算法
+- AES-CBC响应解密过程
+- 安全设计原理
 
-有道翻译API采用客户端-服务器混合加密方案：
-1. **请求签名**：使用MD5生成请求签名
-2. **参数传输**：敏感参数通过POST发送
-3. **响应加密**：使用AES-CBC加密返回结果
+## 技术亮点
 
-```mermaid
-sequenceDiagram
-    participant Client
-    participant Server
-    Client->>Server: POST /webtranslate (签名参数)
-    Server-->>Client: AES加密的响应
-    Client->>Client: 解密响应
+1. **签名算法研究**  
+   分析有道翻译使用的MD5签名生成方法：
+   sign = MD5("client={client}&mysticTime={timestamp}&product={product}&key={sign_key}")
+   2. **AES解密研究**  
+    展示AES-128-CBC解密过程，包括：
+    - Base64解码
+    - PKCS7填充处理
+    - CBC模式解密
+    
+    3. **安全设计分析**  
+    探讨有道翻译的加密策略如何保护API请求安全
